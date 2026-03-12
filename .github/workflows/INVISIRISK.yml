@@ -13,13 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Run build with anomalies
     steps:
-      # ============= InvisiRisk Setup =============
-      - name: Setup PSE
-        uses: invisirisk/pse-action@latest
-        with:
-          api_url: "https://app.stage.invisirisk.com"
-          app_token: ${{secrets.IR_API_KEY}}
-      # ============= InvisiRisk Setup End =============
+  
       - uses: actions/checkout@v4
       
       - name: Set up PHP
@@ -29,11 +23,3 @@ jobs:
           
       - name: Install project dependencies
         run: composer install
-      # ============= InvisiRisk Cleanup =============
-      - name: Cleanup PSE
-        if: always()
-        uses: invisirisk/pse-action@latest
-        with:
-          api_url: "https://app.stage.invisirisk.com"
-          cleanup: "true"
-      # ============= InvisiRisk Cleanup End =============
