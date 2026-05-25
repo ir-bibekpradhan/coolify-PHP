@@ -7,6 +7,7 @@ permissions:
   checks: write
   contents: write
   packages: read
+  actions: write
 
 jobs:
   php-application-build:
