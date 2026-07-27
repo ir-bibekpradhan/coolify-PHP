@@ -13,22 +13,44 @@ jobs:
   php-application-build:
     runs-on: ubuntu-latest
     name: Run build with anomalies
+
     steps:
-  
       # ============= InvisiRisk Setup =============
       - name: Setup PSE
         uses: invisirisk/pse-action@develop
         with:
           api_url: "https://app.dev.invisirisk.com"
-          app_token: ${{secrets.IR_API_KEY}}
+          app_token: ${{ secrets.IR_API_KEY }}
       # ============= InvisiRisk Setup End =============
 
-      - uses: actions/checkout@v4
-      
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: "8.2"
-          
+
       - name: Install project dependencies
         run: composer install
+
+  intentional-failure:
+    runs-on: ubuntu-latest
+    name: Intentional failing job
+
+    steps:
+      # ============= InvisiRisk Setup =============
+      - name: Setup PSE
+        uses: invisirisk/pse-action@develop
+        with:
+          api_url: "https://app.dev.invisirisk.com"
+          app_token: ${{ secrets.IR_API_KEY }}
+      # ============= InvisiRisk Setup End =============
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fail the job intentionally
+        run: |
+          echo "This job is intentionally failing for testing."
+          exit 1
