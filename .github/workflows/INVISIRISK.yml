@@ -15,14 +15,7 @@ jobs:
     name: Run build with anomalies
 
     steps:
-      # ============= InvisiRisk Setup =============
-      - name: Setup PSE
-        uses: invisirisk/pse-action@develop
-        with:
-          api_url: "https://app.stage.invisirisk.com"
-          app_token: ${{ secrets.IR_API_KEY }}
-          mode: sidecar
-      # ============= InvisiRisk Setup End =============
+
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -40,13 +33,7 @@ jobs:
     name: Intentional failing job
 
     steps:
-      # ============= InvisiRisk Setup =============
-      - name: Setup PSE
-        uses: invisirisk/pse-action@develop
-        with:
-          api_url: "https://app.stage.invisirisk.com"
-          app_token: ${{ secrets.IR_API_KEY }}
-      # ============= InvisiRisk Setup End =============
+
 
       - name: Checkout repository
         uses: actions/checkout@v4
